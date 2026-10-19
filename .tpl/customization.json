@@ -1,0 +1,236 @@
+{
+  "$schema": "./schemas/customization.schema.json",
+  "format": "git-template-customization",
+  "formatVersion": "0.2.0",
+  "entries": [
+    {
+      "id": "brand",
+      "title": "品牌与导航",
+      "description": "调整品牌名称、导航、页脚及中英文公共文案。",
+      "files": [
+        {
+          "path": "src/features/site-templates/catalog/viral/components/Shell.tsx",
+          "kind": "file",
+          "purpose": "导航、品牌与页脚"
+        },
+        {
+          "path": "src/features/site-templates/catalog/viral/components/Locale.tsx",
+          "kind": "file",
+          "purpose": "语言上下文"
+        }
+      ],
+      "constraints": [
+        "保留 data-template=\"viral\" 主题容器和 basePath/locale 约定。",
+        "保持中英文导航与移动菜单、语言切换正常。"
+      ],
+      "checks": [
+        "lint",
+        "typecheck",
+        "test",
+        "capture"
+      ]
+    },
+    {
+      "id": "content",
+      "title": "页面内容",
+      "description": "修改标题、案例、服务和文章文案。",
+      "files": [
+        {
+          "path": "src/features/site-templates/catalog/viral/pages",
+          "kind": "directory",
+          "purpose": "页面组件"
+        },
+        {
+          "path": "src/features/site-templates/catalog/viral/data.ts",
+          "kind": "file",
+          "purpose": "公共页面数据"
+        }
+      ],
+      "constraints": [
+        "保留用户原文的否定、条件、数字和单位。",
+        "检查两种语言和三种视口；表单仍为本地演示。"
+      ],
+      "checks": [
+        "lint",
+        "build",
+        "typecheck",
+        "capture"
+      ]
+    },
+    {
+      "id": "theme",
+      "title": "主题与布局",
+      "description": "修改颜色、排版、间距与响应式布局。",
+      "files": [
+        {
+          "path": "src/features/site-templates/catalog/viral/theme.css",
+          "kind": "file",
+          "purpose": "主题样式"
+        },
+        {
+          "path": "STYLE-SPEC.md",
+          "kind": "file",
+          "purpose": "样式约定"
+        }
+      ],
+      "constraints": [
+        "保留主题作用域、键盘焦点和三端布局。",
+        "市场截图需要按实际结果重新拍摄。"
+      ],
+      "checks": [
+        "lint",
+        "build",
+        "capture"
+      ]
+    },
+    {
+      "id": "media-motion",
+      "title": "素材与动效",
+      "description": "替换本地图片、视频，修改轮播与页面动效。",
+      "files": [
+        {
+          "path": "public/templates/viral",
+          "kind": "directory",
+          "purpose": "运行素材与来源"
+        },
+        {
+          "path": "src/features/site-templates/catalog/viral/pages/HomePage.tsx",
+          "kind": "file",
+          "purpose": "首页视频和动效"
+        },
+        {
+          "path": "MOTION-SPEC.md",
+          "kind": "file",
+          "purpose": "动效标准"
+        }
+      ],
+      "constraints": [
+        "保留素材来源与授权记录。",
+        "保留 reduced-motion 和播放控件；静态截图不能证明动效正确，修改动效后另行连续观看。"
+      ],
+      "checks": [
+        "build",
+        "capture"
+      ]
+    },
+    {
+      "id": "routes-locales",
+      "title": "页面与语言",
+      "description": "增删页面和语言，维护运行路由、市场清单及预览地址。",
+      "files": [
+        {
+          "path": "src/features/site-templates/catalog/viral/meta.ts",
+          "kind": "file",
+          "purpose": "实际页面注册"
+        },
+        {
+          "path": "src/features/site-templates/locale-routing.ts",
+          "kind": "file",
+          "purpose": "语言路由"
+        },
+        {
+          "path": "src/app/templates/viral/site/[[...slug]]/page.tsx",
+          "kind": "file",
+          "purpose": "页面入口"
+        },
+        {
+          "path": ".tpl/template.json",
+          "kind": "file",
+          "purpose": "市场页面清单"
+        },
+        {
+          "path": ".tpl/project.json",
+          "kind": "file",
+          "purpose": "预览语言前缀"
+        },
+        {
+          "path": "scripts/capture-viral.mjs",
+          "kind": "file",
+          "purpose": "实际路由和交互验收"
+        }
+      ],
+      "constraints": [
+        "同步 pages/locales 与 previews.localePaths。",
+        "新增语言需要先扩展应用实现，不能只增加市场声明。"
+      ],
+      "checks": [
+        "lint",
+        "build",
+        "typecheck",
+        "test",
+        "capture"
+      ]
+    },
+    {
+      "id": "environment",
+      "title": "启动与配置",
+      "description": "修改启动环境、端口和工具诊断声明。",
+      "files": [
+        {
+          "path": "scripts/next.mjs",
+          "kind": "file",
+          "purpose": "原生服务入口"
+        },
+        {
+          "path": "scripts/lib/environment.mjs",
+          "kind": "file",
+          "purpose": "环境加载"
+        },
+        {
+          "path": ".env.example",
+          "kind": "file",
+          "purpose": "脱敏示例"
+        },
+        {
+          "path": ".tpl/contracts/env.schema.json",
+          "kind": "file",
+          "purpose": "环境合同"
+        },
+        {
+          "path": ".tpl/project.json",
+          "kind": "file",
+          "purpose": "操作、服务及依赖工具"
+        }
+      ],
+      "constraints": [
+        "进程环境优先；秘密不得进入浏览器或 Git。",
+        "只关闭本次启动的进程。"
+      ],
+      "checks": [
+        "test",
+        "build",
+        "capture"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "title": "市场展示资料",
+      "description": "更新卡片信息、封面、截图和许可声明。",
+      "files": [
+        {
+          "path": ".tpl/template.json",
+          "kind": "file",
+          "purpose": "元数据"
+        },
+        {
+          "path": ".tpl/assets",
+          "kind": "directory",
+          "purpose": "展示素材"
+        },
+        {
+          "path": ".tpl/docs/LICENSE.md",
+          "kind": "file",
+          "purpose": "授权范围"
+        }
+      ],
+      "constraints": [
+        "运行素材与展示素材分开。",
+        "维持 listed=false，直到取得公开再分发授权。"
+      ],
+      "checks": [
+        "build",
+        "capture"
+      ]
+    }
+  ]
+}

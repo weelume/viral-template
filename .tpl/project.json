@@ -1,7 +1,7 @@
 {
   "$schema": "./schemas/project.schema.json",
   "format": "git-template-project",
-  "formatVersion": "0.1.0",
+  "formatVersion": "0.2.0",
   "stage": "ready",
   "toolchain": {
     "runtime": "node",
@@ -28,7 +28,11 @@
       "effects": {
         "network": true,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
     },
     "lint": {
       "cwd": ".",
@@ -43,7 +47,11 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
     },
     "typecheck": {
       "cwd": ".",
@@ -60,7 +68,11 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
     },
     "test": {
       "cwd": ".",
@@ -75,7 +87,11 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
     },
     "build": {
       "cwd": ".",
@@ -90,7 +106,11 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm"
+      ]
     },
     "capture": {
       "cwd": ".",
@@ -107,7 +127,12 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm",
+        "browser"
+      ]
     },
     "verify": {
       "cwd": ".",
@@ -122,7 +147,12 @@
       "effects": {
         "network": false,
         "persistentData": false
-      }
+      },
+      "requiresTools": [
+        "node",
+        "pnpm",
+        "browser"
+      ]
     }
   },
   "services": {
@@ -151,7 +181,10 @@
         "path": "/templates/viral/site",
         "status": 200,
         "timeoutSeconds": 60
-      }
+      },
+      "requiresTools": [
+        "node"
+      ]
     }
   },
   "checks": [
@@ -161,5 +194,23 @@
     "test",
     "build",
     "capture"
+  ],
+  "customization": ".tpl/customization.json",
+  "requirements": {
+    "browser": {
+      "kind": "browser",
+      "pathEnv": "CHROME_PATH",
+      "instructions": "安装本机 Chrome/Chromium 或用 CHROME_PATH 指向可执行文件。仅 capture/verify 需要；安装、构建及页面服务不依赖浏览器。"
+    }
+  },
+  "previews": [
+    {
+      "surfaceId": "site",
+      "service": "web",
+      "localePaths": {
+        "zh": "/templates/viral/site",
+        "en": "/templates/viral/site/en"
+      }
+    }
   ]
 }

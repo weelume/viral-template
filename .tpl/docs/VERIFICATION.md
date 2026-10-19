@@ -2,6 +2,8 @@
 
 正式结果记录在 reports/verification.json，不能沿用旧 CT 报告。新目录改变了工程根目录与脚本输出位置，需重新安装、构建和浏览器验收。
 
+0.2.0 报告遵循 schemas/verification.schema.json，覆盖全部六项 checks 与 web 服务。每项保存实际 argv/cwd、状态、退出码和 UTC 时间；未执行时显式填写原因及空执行结果，不能删掉这一项。服务检查通过后确认 stopped=true。sourceCommit 为验收基线，sourceDigest 绑定排除 reports 的交付源码；报告自身后续提交不会使摘要循环变化。
+
 声明的交付检查为 install、lint、typecheck、test、build、capture，命令、工作目录、依赖、超时和副作用见 project.json。pnpm verify 依次执行 lint、build、typecheck、test、capture；install 单独冻结执行。
 
 结构检查：git add 审阅后的交付文件，执行 pnpm tpl:check。检查器核对当前工作树和 Git 索引中的路径、元数据、素材、环境及操作引用，不执行应用，不代表已提交或业务通过。报告 sourceDigest 按检查器对已登记文件计算，排除 .tpl/reports 自身；源码改变后重新验收。
@@ -10,4 +12,10 @@
 
 截图尺寸为桌面 1440×1000、平板 834×1180、手机 390×844，各覆盖首页、关于、博客、联系。市场素材保留本机真实渲染截图；系统回退字体、动画等待时间和视频帧会造成与宿主原图的差异，不能声称逐像素一致。
 
+当前自动截图在 reduced-motion 模式下检查布局、视频载入与交互，不证明所有动效完整连续播放。修改动效后按 MOTION-SPEC.md 另行连续观看，并如实记录人工检查；不要把截图通过等同于动效验收通过。
+
 交付前还应形成 Git 提交，在新目录本地克隆并检查源码、.tpl 和素材齐全，按原生命令安装运行。没有外部远端时不要声称已经发布。当前 Windows 检查不代表 macOS/Linux 验收，不代表真实表单发送或素材商业许可已获确认。
+
+先用 pnpm tpl:doctor --operation <id> 识别工具缺口；该步骤不安装、不启动。普通 pnpm tpl:check 输出报告的 missing/stale/failed/incomplete/passed 状态；正式验收 pnpm tpl:verified 只接受当前摘要匹配的通过报告。报告是作者自述，接收方仍需实际复验。市场导入只读取数据，不执行诊断和验收脚本。
+
+pnpm verify 运行应用检查，不自动改写交付报告。执行验收的 AI 或 CI 应根据真实命令结果按 Schema 生成报告，再进行摘要校验；不能只刷新摘要或 checkedAt 延续旧的通过结论。完整报告需随 Git 提交，否则接收方克隆后没有该验收记录。

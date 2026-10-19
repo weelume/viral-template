@@ -1,15 +1,18 @@
 {
-  "status": "passed",
-  "checkedAt": "2026-10-19T12:48:11.762Z",
-  "sourceCommit": "c81f5d9eaae88f2cf5a8c4a8a2868591fdc6d74e",
-  "sourceDigest": "cfd5c72a01af8833d8305c709a7728b9cbd8e2f3fb259b035ef4c9e76b7cf083",
+  "$schema": "../schemas/verification.schema.json",
+  "format": "git-template-verification",
+  "formatVersion": "0.2.0",
+  "status": "incomplete",
+  "checkedAt": "2026-10-19T13:06:19.558Z",
+  "sourceCommit": null,
+  "sourceDigest": "844344474fd6f4ddc48353c7ae9ef3e45e9c4663c8a91a031f34f87087ca770f",
   "environment": {
     "platform": "win32",
     "arch": "x64",
     "node": "22.13.1",
     "packageManager": "pnpm@12.10.1",
-    "cleanDirectory": true,
-    "localGitClone": true
+    "cleanDirectory": false,
+    "localGitClone": false
   },
   "checks": [
     {
@@ -20,10 +23,11 @@
         "--frozen-lockfile"
       ],
       "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:46:53.308Z",
-      "finishedAt": "2026-10-19T12:47:00.771Z"
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
     },
     {
       "id": "lint",
@@ -33,23 +37,11 @@
         "lint"
       ],
       "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:47:00.771Z",
-      "finishedAt": "2026-10-19T12:47:06.139Z"
-    },
-    {
-      "id": "build",
-      "argv": [
-        "pnpm",
-        "run",
-        "build"
-      ],
-      "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:47:06.140Z",
-      "finishedAt": "2026-10-19T12:47:32.688Z"
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
     },
     {
       "id": "typecheck",
@@ -59,10 +51,11 @@
         "typecheck"
       ],
       "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:47:32.689Z",
-      "finishedAt": "2026-10-19T12:47:34.571Z"
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
     },
     {
       "id": "test",
@@ -72,10 +65,25 @@
         "test"
       ],
       "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:47:34.572Z",
-      "finishedAt": "2026-10-19T12:47:35.160Z"
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
+    },
+    {
+      "id": "build",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "cwd": ".",
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
     },
     {
       "id": "capture",
@@ -85,19 +93,23 @@
         "capture"
       ],
       "cwd": ".",
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T12:47:35.161Z",
-      "finishedAt": "2026-10-19T12:48:09.870Z"
+      "status": "not-executed",
+      "exitCode": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
     }
   ],
-  "service": {
-    "status": "passed",
-    "stopped": true,
-    "port": "temporary local port"
-  },
+  "services": [
+    {
+      "id": "web",
+      "status": "not-executed",
+      "stopped": true,
+      "checkedAt": null,
+      "reason": "等待重新验收。"
+    }
+  ],
   "limitations": [
-    "同一 Windows 机器的独立 Git 克隆目录，可能复用依赖缓存；未验证其他操作系统。",
-    "只验证声明的页面和交互，表单没有真实业务发送；素材公开再分发许可未确认。"
+    "不能沿用 0.1.0 布局的通过结果。"
   ]
 }

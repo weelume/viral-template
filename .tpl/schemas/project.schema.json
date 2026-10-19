@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:git-template:project:0.1.0",
+  "$id": "urn:git-template:project:0.2.0",
   "title": "Git 模板使用与运行合同",
   "type": "object",
   "additionalProperties": false,
@@ -13,7 +13,10 @@
     "environment",
     "operations",
     "services",
-    "checks"
+    "checks",
+    "customization",
+    "requirements",
+    "previews"
   ],
   "properties": {
     "$schema": {
@@ -23,7 +26,7 @@
       "const": "git-template-project"
     },
     "formatVersion": {
-      "const": "0.1.0"
+      "const": "0.2.0"
     },
     "stage": {
       "enum": [
@@ -97,7 +100,8 @@
           "dependsOn",
           "timeoutSeconds",
           "requiredEnv",
-          "effects"
+          "effects",
+          "requiresTools"
         ],
         "properties": {
           "cwd": {
@@ -149,6 +153,14 @@
                 "type": "boolean"
               }
             }
+          },
+          "requiresTools": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
           }
         }
       }
@@ -166,7 +178,8 @@
           "requiredEnv",
           "effects",
           "port",
-          "ready"
+          "ready",
+          "requiresTools"
         ],
         "properties": {
           "cwd": {
@@ -269,6 +282,14 @@
                 "const": "http"
               }
             }
+          },
+          "requiresTools": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
           }
         }
       }
@@ -279,6 +300,81 @@
       "items": {
         "type": "string",
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "customization": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "instructions"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "command",
+              "browser"
+            ]
+          },
+          "argv": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "expectedVersion": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "pathEnv": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "previews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "surfaceId",
+          "service",
+          "localePaths"
+        ],
+        "properties": {
+          "surfaceId": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "service": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "localePaths": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
       }
     }
   }

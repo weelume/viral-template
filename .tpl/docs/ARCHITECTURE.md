@@ -14,6 +14,8 @@
 | public/templates/viral | 本地图片、视频、原始截图及素材来源 |
 | .tpl | 使用规则、声明式市场元数据、运行合同及市场展示素材 |
 
+customization.json 将常见修改目标映射到真实入口与检查。project.requirements/requiresTools 为额外工具和分项依赖；previews 把市场的端/语言/页面映射到 web 服务的实际基础路径。工具只读合同执行结构校验、报告摘要比对和索引导出；doctor 需显式调用才运行版本探测，不由市场导入触发。应用不 import 这些工具。
+
 页面统一使用 Shell，并通过公共 SiteTemplatePageProps 接收 basePath/locale。跨模块通过公共类型和出口引用，避免循环依赖。应用路由以代码为实际实现；新增页面或语言时同步 .tpl/template.json 的市场清单和浏览器检查。
 
 template.json 的 platform 表示独立业务端，device 表示截图视口，不能因为有手机截图就虚构一个手机业务端。当前只有一个 site 端，支持中英文与三种视口。

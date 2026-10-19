@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:git-template:template:0.1.0",
+  "$id": "urn:git-template:template:0.2.0",
   "title": "Git 模板市场展示元数据",
   "type": "object",
   "additionalProperties": false,
@@ -29,7 +29,7 @@
       "const": "git-template"
     },
     "formatVersion": {
-      "const": "0.1.0"
+      "const": "0.2.0"
     },
     "id": {
       "type": "string",

@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { lstat, readFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { resolvePreviews, assessVerification } from './contracts.mjs';
 
 const exec = promisify(execFile);
 const schemaRoot = fileURLToPath(new URL('../schemas/', import.meta.url));
@@ -55,7 +56,7 @@ export function assertPath(path, allowRoot = false) {
   return path;
 }
 
-async function checkedPath(root, path, kind = 'file') {
+export async function checkedPath(root, path, kind = 'file') {
   assertPath(path, kind === 'directory');
   if (path === '.') return root;
   let current = root;
@@ -75,6 +76,11 @@ async function jsonAt(root, path) {
   return JSON.parse(await readFile(file, 'utf8'));
 }
 
+async function canonical(value, name) {
+  validate(value, JSON.parse(await readFile(join(schemaRoot, `${name}.schema.json`), 'utf8')));
+  return value;
+}
+
 function unique(values, label) {
   if (new Set(values).size !== values.length) throw new Error(`${label} 重复`);
 }
@@ -82,7 +88,7 @@ function unique(values, label) {
 export async function readTemplate(directory) {
   const root = resolve(directory);
   const template = await jsonAt(root, '.tpl/template.json');
-  validate(template, JSON.parse(await readFile(join(schemaRoot, 'template.schema.json'), 'utf8')));
+  await canonical(template, 'template');
   unique(template.surfaces.map(s => s.id), '端 id');
   for (const surface of template.surfaces) {
     if (surface.id === 'preview') throw new Error('端 id preview 为 Weelume 保留值');
@@ -125,7 +131,9 @@ export async function readTemplate(directory) {
     if (shot.surfaceId && !surface) throw new Error(`截图引用未知端：${shot.surfaceId}`);
     if (shot.pageSlug !== undefined && (!surface || !surface.pages.some(p => p.slug === shot.pageSlug))) throw new Error('截图引用未知页面');
   }
-  return { root, template, assets };
+  const project = await canonical(await jsonAt(root, '.tpl/project.json'), 'project');
+  const previews = resolvePreviews(template, project);
+  return { root, template, project, assets, previews };
 }
 
 async function git(root, args) {
@@ -154,7 +162,7 @@ function acyclic(items, label) {
   Object.keys(items).forEach(visit);
 }
 
-export async function inspectProject(directory) {
+export async function inspectProject(directory, { requireVerified = false } = {}) {
   const data = await readTemplate(directory);
   const { root } = data;
   const gitRoot = await git(root, ['rev-parse', '--show-toplevel']);
@@ -180,8 +188,19 @@ export async function inspectProject(directory) {
     if (kind === 'file' && !tracked.has(path)) throw new Error(`交付引用未加入 Git：${path}`);
   };
   for (const path of ['.tpl/template.json', '.tpl/project.json', 'AGENTS.md', '.gitignore', ...requiredDocs.map(p => '.tpl/' + p), ...data.assets.map(a => '.tpl/' + a.path), '.tpl/' + data.template.license.file]) await requireTracked(path);
-  const project = await jsonAt(root, '.tpl/project.json');
-  validate(project, JSON.parse(await readFile(join(schemaRoot, 'project.schema.json'), 'utf8')));
+  const { project } = data;
+  assertPath(project.customization);
+  if (project.customization !== '.tpl/customization.json') throw new Error('修改映射入口固定为 .tpl/customization.json');
+  await requireTracked(project.customization);
+  const customization = await canonical(await jsonAt(root, project.customization), 'customization');
+  unique(customization.entries.map(e => e.id), '修改目标 id');
+  for (const entry of customization.entries) {
+    for (const file of entry.files) {
+      await requireTracked(file.path, file.kind);
+      if (file.kind === 'directory' && ![...tracked.keys()].some(p => p.startsWith(file.path === '.' ? '' : file.path + '/'))) throw new Error(`修改入口目录没有交付文件：${file.path}`);
+    }
+    for (const id of entry.checks) if (!Object.hasOwn(project.operations, id)) throw new Error(`修改映射检查不存在：${id}`);
+  }
   for (const path of [project.toolchain.runtimeVersionFile, project.toolchain.packageManagerSource, project.environment.schema, project.environment.example]) await requireTracked(path);
   if (project.toolchain.lockfile !== null) await requireTracked(project.toolchain.lockfile);
   if (project.stage === 'ready') {
@@ -192,6 +211,7 @@ export async function inspectProject(directory) {
     if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('Node 版本必须精确固定');
     if (!project.toolchain.lockfile || !['install', 'build', 'verify'].every(id => Object.hasOwn(project.operations, id)) || !Object.keys(project.services).length) throw new Error('ready 工程缺少锁文件、安装/构建/验证操作或服务');
     if (!project.operations.install.argv.includes('--frozen-lockfile')) throw new Error('安装操作必须冻结锁文件');
+    if (!project.checks.length || !customization.entries.length) throw new Error('ready 工程必须提供实际检查与常见修改映射');
   }
   const env = await jsonAt(root, project.environment.schema);
   if (env.type !== 'object' || !env.properties || env.additionalProperties !== false) throw new Error('环境合同必须显式声明变量并禁止额外属性');
@@ -199,12 +219,21 @@ export async function inspectProject(directory) {
     if (!/^[A-Z][A-Z0-9_]*$/.test(key) || field.type !== 'string' || typeof field['x-secret'] !== 'boolean' || !['public', 'server'].includes(field['x-exposure'])) throw new Error(`环境变量注解不完整：${key}`);
     if (field['x-secret'] && (field['x-exposure'] === 'public' || Object.hasOwn(field, 'default'))) throw new Error(`环境秘密不能公开或带默认值：${key}`);
   }
+  const toolIds = new Set(['node', 'pnpm', 'git']);
+  for (const [id, requirement] of Object.entries(project.requirements)) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) || toolIds.has(id)) throw new Error(`工具 id 重复、保留或不规范：${id}`);
+    toolIds.add(id);
+    if (requirement.kind === 'command') {
+      if (!requirement.argv?.length || requirement.pathEnv) throw new Error(`命令工具必须声明版本探测 argv：${id}`);
+    } else if (!requirement.pathEnv || requirement.argv || requirement.expectedVersion || !Object.hasOwn(env.properties, requirement.pathEnv) || env.properties[requirement.pathEnv]['x-secret']) throw new Error(`浏览器工具必须引用已声明的非秘密路径环境变量：${id}`);
+  }
   for (const [label, commands] of [['操作', project.operations], ['服务', project.services]]) {
     acyclic(commands, label);
     for (const [id, command] of Object.entries(commands)) {
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) throw new Error(`${label} id 不规范`);
       await requireTracked(command.cwd, 'directory');
       for (const name of command.requiredEnv) if (!Object.hasOwn(env.properties, name)) throw new Error(`未声明环境变量：${name}`);
+      for (const tool of command.requiresTools) if (!toolIds.has(tool)) throw new Error(`未声明工具：${tool}`);
       for (const op of command.prepareOperations ?? []) if (!Object.hasOwn(project.operations, op)) throw new Error(`准备操作不存在：${op}`);
       if (command.port && !Object.hasOwn(env.properties, command.port.env)) throw new Error('服务端口环境变量未声明');
     }
@@ -214,9 +243,23 @@ export async function inspectProject(directory) {
   for (const [path, file] of [...tracked].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) {
     if (!path.startsWith('.tpl/reports/')) hashes.push([path, sha256(await readFile(file))]);
   }
-  return { ...data, project, trackedFiles: tracked.size, sourceDigest: sha256(JSON.stringify(hashes)) };
+  const sourceDigest = sha256(JSON.stringify(hashes));
+  let report;
+  try {
+    report = await jsonAt(root, '.tpl/reports/verification.json');
+    await canonical(report, 'verification');
+  } catch (error) {
+    // 只把报告文件本身缺失视为 missing；路径中的链接和无效 JSON 仍然报错。
+    if (error.code !== 'ENOENT') throw error;
+  }
+  const verification = assessVerification(report, project, sourceDigest);
+  if (requireVerified && verification.state !== 'passed') throw new Error(`验收未通过：${verification.state}`);
+  return { ...data, customization, trackedFiles: tracked.size, sourceDigest, verification };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  inspectProject(process.argv[2] || '.').then(result => console.log(JSON.stringify({ id: result.template.id, stage: result.project.stage, files: result.trackedFiles, sourceDigest: result.sourceDigest, formatCheck: 'passed', applicationChecks: 'not-executed' }, null, 2))).catch(error => { console.error(error.message); process.exitCode = 1; });
+  const args = process.argv.slice(2), requireVerified = args.includes('--require-verified');
+  const directories = args.filter(a => a !== '--require-verified');
+  if (directories.length > 1 || directories.some(a => a.startsWith('--'))) { console.error('用法：node check.mjs [工程目录] [--require-verified]'); process.exitCode = 1; }
+  else inspectProject(directories[0] || '.', { requireVerified }).then(result => console.log(JSON.stringify({ id: result.template.id, stage: result.project.stage, files: result.trackedFiles, sourceDigest: result.sourceDigest, verification: result.verification, formatCheck: 'passed', applicationChecks: 'not-executed' }, null, 2))).catch(error => { console.error(error.message); process.exitCode = 1; });
 }

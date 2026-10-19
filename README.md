@@ -1,6 +1,6 @@
 # Viral 社媒增长模板
 
-这是独立 Git 工程，根目录直接保留 Next.js 源码、package.json、pnpm-lock.yaml、public 和 scripts。模板市场资料及完整使用规则集中在 [.tpl/README.md](.tpl/README.md)。协议为 git-template 0.1.0，模板版本 1.0.0。
+这是独立 Git 工程，根目录直接保留 Next.js 源码、package.json、pnpm-lock.yaml、public 和 scripts。模板市场资料及完整使用规则集中在 [.tpl/README.md](.tpl/README.md)。协议为 git-template 0.2.0，模板版本 1.1.0。
 
 固定 Node.js 22.13.1、pnpm 12.10.1。在工程根目录运行：
 
@@ -17,5 +17,7 @@ pnpm start
 市场读取 [.tpl/template.json](.tpl/template.json)，AI 读取 [.tpl/project.json](.tpl/project.json) 与使用规则。结构检查为 `pnpm tpl:check`，它要求交付文件已加入 Git 索引，不运行应用。首次提交前请审阅 git diff --cached；提交与标签遵循项目流程。没有自定义压缩包或解包运行器。
 
 此模板的表单仅本地演示，没有业务 API 或数据库。固定品牌入口 /templates 来自原宿主系统，本独立工程没有模板市场页面。
+
+常见修改入口见 [.tpl/customization.json](.tpl/customization.json)。执行 `pnpm tpl:doctor --operation capture` 诊断该操作所需工具；缺少浏览器不影响安装、构建和普通预览。`pnpm tpl:verified` 检查当前源码是否有有效通过报告，报告过期时需重新验收。project.json 的 previews 明确声明两种语言的预览路径，供未来市场读取。
 
 原始素材限定内部演示，公开使用及再分发前需取得相应许可，详见 [.tpl/docs/LICENSE.md](.tpl/docs/LICENSE.md)。

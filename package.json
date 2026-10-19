@@ -1,7 +1,7 @@
 {
   "name": "viral-site-reference",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "packageManager": "pnpm@12.10.1",
   "scripts": {
@@ -13,7 +13,9 @@
     "capture": "node scripts/capture-viral.mjs",
     "test": "node --test tests/*.test.mjs",
     "verify": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm capture",
-    "tpl:check": "node .tpl/tools/check.mjs ."
+    "tpl:check": "node .tpl/tools/check.mjs .",
+    "tpl:doctor": "node .tpl/tools/doctor.mjs .",
+    "tpl:verified": "node .tpl/tools/check.mjs . --require-verified"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

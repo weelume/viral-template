@@ -1,5 +1,7 @@
 # 修改规则
 
+机器可读入口为 ../customization.json，共七类常见修改，文件路径均相对工程根。files.kind=file/directory；checks 引用 project.json 的实际操作。它帮助 AI 定位入口，不作为修改源码的白名单；遇到复杂需求仍可直接修改工程，再更新相关说明和检查。
+
 | 修改目标 | 根目录下文件入口 | 必须同步验证 |
 | --- | --- | --- |
 | 品牌、导航、页脚 | src/features/site-templates/catalog/viral/components/Shell.tsx | 两种语言、移动导航与站内链接 |
@@ -19,3 +21,5 @@ template.json 中的 id 稳定标识模板，version 是模板版本，formatVer
 新增真实业务需要补齐实现、测试与合同。表单接入第三方发送、数据持久化、数据库迁移、外部网络等行为必须明确声明并获得该功能范围内授权。未经要求不部署、上架或上传。
 
 完成后执行 pnpm verify 和 pnpm tpl:check，审阅 Git 差异并更新版本及验收记录。源码与素材的授权范围按 LICENSE.md 处理。
+
+修改页面或语言时同时更新 project.previews.localePaths；catalog 根据每个语言基础路径与页面 slug 组合地址。中文首页路径没有 /zh，英文带 /en，不从语言代码猜路径。修改完成后刷新真实报告并执行 pnpm tpl:verified，不能沿用 sourceDigest 不匹配的旧结果。
