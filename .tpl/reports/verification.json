@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-19T12:48:11.762Z",
+  "sourceCommit": "c81f5d9eaae88f2cf5a8c4a8a2868591fdc6d74e",
+  "sourceDigest": "cfd5c72a01af8833d8305c709a7728b9cbd8e2f3fb259b035ef4c9e76b7cf083",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "22.13.1",
+    "packageManager": "pnpm@12.10.1",
+    "cleanDirectory": true,
+    "localGitClone": true
+  },
+  "checks": [
+    {
+      "id": "install",
+      "argv": [
+        "pnpm",
+        "install",
+        "--frozen-lockfile"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:46:53.308Z",
+      "finishedAt": "2026-10-19T12:47:00.771Z"
+    },
+    {
+      "id": "lint",
+      "argv": [
+        "pnpm",
+        "run",
+        "lint"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:47:00.771Z",
+      "finishedAt": "2026-10-19T12:47:06.139Z"
+    },
+    {
+      "id": "build",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:47:06.140Z",
+      "finishedAt": "2026-10-19T12:47:32.688Z"
+    },
+    {
+      "id": "typecheck",
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:47:32.689Z",
+      "finishedAt": "2026-10-19T12:47:34.571Z"
+    },
+    {
+      "id": "test",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:47:34.572Z",
+      "finishedAt": "2026-10-19T12:47:35.160Z"
+    },
+    {
+      "id": "capture",
+      "argv": [
+        "pnpm",
+        "run",
+        "capture"
+      ],
+      "cwd": ".",
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T12:47:35.161Z",
+      "finishedAt": "2026-10-19T12:48:09.870Z"
+    }
+  ],
+  "service": {
+    "status": "passed",
+    "stopped": true,
+    "port": "temporary local port"
+  },
+  "limitations": [
+    "同一 Windows 机器的独立 Git 克隆目录，可能复用依赖缓存；未验证其他操作系统。",
+    "只验证声明的页面和交互，表单没有真实业务发送；素材公开再分发许可未确认。"
+  ]
+}
