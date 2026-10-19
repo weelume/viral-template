@@ -1,0 +1,8 @@
+{
+  "source": "viral-site/workspace",
+  "sourceProtocol": "ct-project@0.1.0",
+  "migration": "原生 Git 工程与 .tpl 资料目录",
+  "createdAt": "2026-10-19T12:36:50.506Z",
+  "sourceRepository": null,
+  "sourceRevision": null
+}

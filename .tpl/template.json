@@ -1,0 +1,224 @@
+{
+  "$schema": "./schemas/template.schema.json",
+  "format": "git-template",
+  "formatVersion": "0.1.0",
+  "id": "viral",
+  "version": "1.0.0",
+  "name": "微域生光 · Viral 社媒增长",
+  "localizedNames": {
+    "en": "Weelume · Viral social growth"
+  },
+  "sceneId": "corporate-site",
+  "listed": false,
+  "tags": [
+    "米白黑色",
+    "社交媒体营销",
+    "案例与 FAQ",
+    "PC / iPad / H5",
+    "中英文官网"
+  ],
+  "summary": "社媒增长机构双语官网：内容创作、社媒管理、付费媒体、客户案例、博客、联系与政策页面，本地视频和响应式布局。",
+  "localizedSummaries": {
+    "en": "A bilingual social growth agency website with local media, case studies, a blog and responsive layouts."
+  },
+  "accentColor": "#111111",
+  "cover": "assets/cover.webp",
+  "screenshots": [
+    {
+      "src": "assets/home.webp",
+      "alt": "Viral desktop 首页",
+      "device": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "surfaceId": "site",
+      "pageSlug": ""
+    },
+    {
+      "src": "assets/features.webp",
+      "alt": "Viral desktop 关于与服务",
+      "device": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "surfaceId": "site",
+      "pageSlug": "about"
+    },
+    {
+      "src": "assets/blog.webp",
+      "alt": "Viral desktop 博客",
+      "device": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "surfaceId": "site",
+      "pageSlug": "blog"
+    },
+    {
+      "src": "assets/contact.webp",
+      "alt": "Viral desktop 联系",
+      "device": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "surfaceId": "site",
+      "pageSlug": "book-a-call"
+    },
+    {
+      "src": "assets/tablet-home.webp",
+      "alt": "Viral tablet 首页",
+      "device": "tablet",
+      "width": 834,
+      "height": 1180,
+      "surfaceId": "site",
+      "pageSlug": ""
+    },
+    {
+      "src": "assets/tablet-features.webp",
+      "alt": "Viral tablet 关于与服务",
+      "device": "tablet",
+      "width": 834,
+      "height": 1180,
+      "surfaceId": "site",
+      "pageSlug": "about"
+    },
+    {
+      "src": "assets/tablet-blog.webp",
+      "alt": "Viral tablet 博客",
+      "device": "tablet",
+      "width": 834,
+      "height": 1180,
+      "surfaceId": "site",
+      "pageSlug": "blog"
+    },
+    {
+      "src": "assets/tablet-contact.webp",
+      "alt": "Viral tablet 联系",
+      "device": "tablet",
+      "width": 834,
+      "height": 1180,
+      "surfaceId": "site",
+      "pageSlug": "book-a-call"
+    },
+    {
+      "src": "assets/mobile-home.webp",
+      "alt": "Viral mobile 首页",
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "surfaceId": "site",
+      "pageSlug": ""
+    },
+    {
+      "src": "assets/mobile-features.webp",
+      "alt": "Viral mobile 关于与服务",
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "surfaceId": "site",
+      "pageSlug": "about"
+    },
+    {
+      "src": "assets/mobile-blog.webp",
+      "alt": "Viral mobile 博客",
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "surfaceId": "site",
+      "pageSlug": "blog"
+    },
+    {
+      "src": "assets/mobile-contact.webp",
+      "alt": "Viral mobile 联系",
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "surfaceId": "site",
+      "pageSlug": "book-a-call"
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "site",
+      "name": "社媒增长官网",
+      "platform": "pc",
+      "locales": [
+        "zh",
+        "en"
+      ],
+      "pages": [
+        {
+          "slug": "",
+          "title": "首页",
+          "localizedTitles": {
+            "en": "Home"
+          }
+        },
+        {
+          "slug": "about",
+          "title": "关于 Viral",
+          "localizedTitles": {
+            "en": "About Viral"
+          }
+        },
+        {
+          "slug": "case-studies",
+          "title": "客户案例",
+          "localizedTitles": {
+            "en": "Case studies"
+          }
+        },
+        {
+          "slug": "blog",
+          "title": "博客",
+          "localizedTitles": {
+            "en": "Blog"
+          }
+        },
+        {
+          "slug": "blog/short-form-playbook",
+          "title": "短视频增长方法",
+          "localizedTitles": {
+            "en": "The short-form playbook"
+          }
+        },
+        {
+          "slug": "book-a-call",
+          "title": "预约通话",
+          "localizedTitles": {
+            "en": "Book a call"
+          }
+        },
+        {
+          "slug": "privacy-policy",
+          "title": "隐私政策",
+          "localizedTitles": {
+            "en": "Privacy policy"
+          }
+        },
+        {
+          "slug": "terms-of-service",
+          "title": "服务条款",
+          "localizedTitles": {
+            "en": "Terms of Service"
+          }
+        },
+        {
+          "slug": "404",
+          "title": "404",
+          "localizedTitles": {
+            "en": "404"
+          }
+        }
+      ]
+    }
+  ],
+  "stack": [
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Framer Motion"
+  ],
+  "license": {
+    "type": "restricted",
+    "file": "docs/LICENSE.md",
+    "summary": "原始素材限定内部模板复刻演示；公开发布及再分发需取得相应权利人许可。",
+    "redistributionAllowed": false
+  }
+}

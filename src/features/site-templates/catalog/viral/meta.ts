@@ -1,0 +1,41 @@
+import type { SiteTemplate } from '../../types'
+
+export const viralTemplate: SiteTemplate = {
+  id: 'viral',
+  name: '微域生光 · Viral 社媒增长',
+  localizedNames: { en: 'Weelume · Viral social growth' },
+  sceneId: 'corporate-site',
+  listed: false,
+  tags: ['米白黑色', '社交媒体营销', '案例与 FAQ', 'PC / iPad / H5', '中英文官网'],
+  summary: '复刻 Viral 社交媒体机构官网的完整信息架构：内容创作、社媒管理、付费媒体、增长案例、团队、FAQ、联系与政策页面，支持中文默认路径与英文 /en 路径。',
+  accentColor: '#111111',
+  cover: '/templates/viral/assets/hero.jpg',
+  screenshots: [
+    { src: '/templates/viral/screenshots/home.webp', alt: 'Viral 首页桌面端', device: 'desktop', width: 1440, height: 1000 },
+    { src: '/templates/viral/screenshots/features.webp', alt: 'Viral 关于与服务桌面端', device: 'desktop', width: 1440, height: 1000 },
+    { src: '/templates/viral/screenshots/blog.webp', alt: 'Viral 博客桌面端', device: 'desktop', width: 1440, height: 1000 },
+    { src: '/templates/viral/screenshots/contact.webp', alt: 'Viral 联系桌面端', device: 'desktop', width: 1440, height: 1000 },
+    { src: '/templates/viral/screenshots/tablet-home.webp', alt: 'Viral 首页平板端', device: 'tablet', width: 834, height: 1180 },
+    { src: '/templates/viral/screenshots/tablet-features.webp', alt: 'Viral 关于与服务平板端', device: 'tablet', width: 834, height: 1180 },
+    { src: '/templates/viral/screenshots/tablet-blog.webp', alt: 'Viral 博客平板端', device: 'tablet', width: 834, height: 1180 },
+    { src: '/templates/viral/screenshots/tablet-contact.webp', alt: 'Viral 联系平板端', device: 'tablet', width: 834, height: 1180 },
+    { src: '/templates/viral/screenshots/mobile-home.webp', alt: 'Viral 首页移动端', device: 'mobile', width: 390, height: 844 },
+    { src: '/templates/viral/screenshots/mobile-features.webp', alt: 'Viral 关于与服务移动端', device: 'mobile', width: 390, height: 844 },
+    { src: '/templates/viral/screenshots/mobile-blog.webp', alt: 'Viral 博客移动端', device: 'mobile', width: 390, height: 844 },
+    { src: '/templates/viral/screenshots/mobile-contact.webp', alt: 'Viral 联系移动端', device: 'mobile', width: 390, height: 844 },
+  ],
+  surfaces: [{
+    id: 'site', name: '社媒增长官网', platform: 'pc', locales: ['zh', 'en'],
+    pages: [
+      { slug: '', title: '首页', localizedTitles: { en: 'Home' }, load: () => import('./pages/HomePage') },
+      { slug: 'about', title: '关于 Viral', localizedTitles: { en: 'About Viral' }, load: () => import('./pages/AboutPage') },
+      { slug: 'case-studies', title: '客户案例', localizedTitles: { en: 'Case studies' }, load: () => import('./pages/CasesPage') },
+      { slug: 'blog', title: '博客', localizedTitles: { en: 'Blog' }, load: () => import('./pages/BlogPage') },
+      { slug: 'blog/short-form-playbook', title: '短视频增长方法', localizedTitles: { en: 'The short-form playbook' }, load: () => import('./pages/ArticlePage') },
+      { slug: 'book-a-call', title: '预约通话', localizedTitles: { en: 'Book a call' }, load: () => import('./pages/ContactPage') },
+      { slug: 'privacy-policy', title: '隐私政策', localizedTitles: { en: 'Privacy policy' }, load: () => import('./pages/PrivacyPage') },
+      { slug: 'terms-of-service', title: '服务条款', localizedTitles: { en: 'Terms of service' }, load: () => import('./pages/TermsPage') },
+      { slug: '404', title: '404', localizedTitles: { en: '404' }, load: () => import('./pages/NotFoundPage') },
+    ],
+  }],
+}

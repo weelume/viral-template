@@ -1,0 +1,165 @@
+{
+  "$schema": "./schemas/project.schema.json",
+  "format": "git-template-project",
+  "formatVersion": "0.1.0",
+  "stage": "ready",
+  "toolchain": {
+    "runtime": "node",
+    "runtimeVersionFile": ".nvmrc",
+    "packageManager": "pnpm",
+    "packageManagerSource": "package.json",
+    "lockfile": "pnpm-lock.yaml"
+  },
+  "environment": {
+    "schema": ".tpl/contracts/env.schema.json",
+    "example": ".env.example"
+  },
+  "operations": {
+    "install": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "install",
+        "--frozen-lockfile"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": true,
+        "persistentData": false
+      }
+    },
+    "lint": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "lint"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    },
+    "typecheck": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    },
+    "test": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    },
+    "build": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    },
+    "capture": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "capture"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "timeoutSeconds": 300,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    },
+    "verify": {
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "verify"
+      ],
+      "dependsOn": [],
+      "timeoutSeconds": 600,
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      }
+    }
+  },
+  "services": {
+    "web": {
+      "cwd": ".",
+      "argv": [
+        "node",
+        "scripts/next.mjs",
+        "start"
+      ],
+      "dependsOn": [],
+      "prepareOperations": [
+        "build"
+      ],
+      "requiredEnv": [],
+      "effects": {
+        "network": false,
+        "persistentData": false
+      },
+      "port": {
+        "env": "PORT",
+        "default": 43120
+      },
+      "ready": {
+        "kind": "http",
+        "path": "/templates/viral/site",
+        "status": 200,
+        "timeoutSeconds": 60
+      }
+    }
+  },
+  "checks": [
+    "install",
+    "lint",
+    "typecheck",
+    "test",
+    "build",
+    "capture"
+  ]
+}
