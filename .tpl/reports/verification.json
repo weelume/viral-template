@@ -2,114 +2,109 @@
   "$schema": "../schemas/verification.schema.json",
   "format": "git-template-verification",
   "formatVersion": "0.2.0",
-  "status": "incomplete",
-  "checkedAt": "2026-10-19T13:06:19.558Z",
-  "sourceCommit": null,
-  "sourceDigest": "844344474fd6f4ddc48353c7ae9ef3e45e9c4663c8a91a031f34f87087ca770f",
+  "status": "passed",
+  "checkedAt": "2026-10-19T13:15:06.743Z",
+  "sourceCommit": "d11a3f743f32a3b8b6d831be4c5795f65cc26c04",
+  "sourceDigest": "86eab039a837629de731535752930d02af95961c86e461d12b040b579b18e4b9",
   "environment": {
     "platform": "win32",
     "arch": "x64",
     "node": "22.13.1",
     "packageManager": "pnpm@12.10.1",
-    "cleanDirectory": false,
-    "localGitClone": false
+    "cleanDirectory": true,
+    "localGitClone": true
   },
   "checks": [
     {
       "id": "install",
+      "cwd": ".",
       "argv": [
         "pnpm",
         "install",
         "--frozen-lockfile"
       ],
-      "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:13:47.870Z",
+      "finishedAt": "2026-10-19T13:13:56.694Z"
     },
     {
       "id": "lint",
+      "cwd": ".",
       "argv": [
         "pnpm",
         "run",
         "lint"
       ],
-      "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
-    },
-    {
-      "id": "typecheck",
-      "argv": [
-        "pnpm",
-        "run",
-        "typecheck"
-      ],
-      "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
-    },
-    {
-      "id": "test",
-      "argv": [
-        "pnpm",
-        "run",
-        "test"
-      ],
-      "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:13:56.696Z",
+      "finishedAt": "2026-10-19T13:14:02.173Z"
     },
     {
       "id": "build",
+      "cwd": ".",
       "argv": [
         "pnpm",
         "run",
         "build"
       ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:14:02.174Z",
+      "finishedAt": "2026-10-19T13:14:27.125Z"
+    },
+    {
+      "id": "typecheck",
       "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:14:27.127Z",
+      "finishedAt": "2026-10-19T13:14:28.976Z"
+    },
+    {
+      "id": "test",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "test"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:14:28.977Z",
+      "finishedAt": "2026-10-19T13:14:29.524Z"
     },
     {
       "id": "capture",
+      "cwd": ".",
       "argv": [
         "pnpm",
         "run",
         "capture"
       ],
-      "cwd": ".",
-      "status": "not-executed",
-      "exitCode": null,
-      "startedAt": null,
-      "finishedAt": null,
-      "reason": "协议 0.2.0 改动后等待重新验收，旧报告已保留在本机 .work。"
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-10-19T13:14:29.526Z",
+      "finishedAt": "2026-10-19T13:15:04.741Z"
     }
   ],
   "services": [
     {
       "id": "web",
-      "status": "not-executed",
+      "status": "passed",
       "stopped": true,
-      "checkedAt": null,
-      "reason": "等待重新验收。"
+      "checkedAt": "2026-10-19T13:15:06.189Z"
     }
   ],
   "limitations": [
-    "不能沿用 0.1.0 布局的通过结果。"
+    "同一 Windows 机器的独立 Git 克隆目录，可能复用依赖缓存；未验证其他操作系统。",
+    "自动截图在 reduced-motion 模式下运行，未连续人工观看全部动效。",
+    "表单仅本地演示；素材公开再分发许可未确认。"
   ]
 }
