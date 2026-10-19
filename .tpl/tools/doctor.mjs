@@ -61,13 +61,13 @@ export async function diagnose(directory, { probe = probeTool } = {}) {
   const operations = {}, services = {};
   const merge = results => [...new Set(results.flatMap(r => r.missingTools))].sort();
   const operation = id => {
-    if (operations[id]) return operations[id];
+    if (Object.hasOwn(operations, id)) return operations[id];
     const op = project.operations[id], dependencies = op.dependsOn.map(operation);
     const missingTools = merge([{ missingTools: op.requiresTools.filter(t => !available.has(t)) }, ...dependencies]);
     return operations[id] = { available: !missingTools.length, missingTools };
   };
   const service = id => {
-    if (services[id]) return services[id];
+    if (Object.hasOwn(services, id)) return services[id];
     const svc = project.services[id], dependencies = [...svc.dependsOn.map(service), ...svc.prepareOperations.map(operation)];
     const missingTools = merge([{ missingTools: svc.requiresTools.filter(t => !available.has(t)) }, ...dependencies]);
     return services[id] = { available: !missingTools.length, missingTools };
