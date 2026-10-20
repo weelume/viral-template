@@ -21,3 +21,5 @@ pnpm start
 常见修改入口见 [.tpl/customization.json](.tpl/customization.json)。执行 `pnpm tpl:doctor --operation capture` 诊断该操作所需工具；缺少浏览器不影响安装、构建和普通预览。`pnpm tpl:verified` 检查当前源码是否有有效通过报告，报告过期时需重新验收。project.json 的 previews 明确声明两种语言的预览路径，供未来市场读取。
 
 原始素材限定内部演示，公开使用及再分发前需取得相应许可，详见 [.tpl/docs/LICENSE.md](.tpl/docs/LICENSE.md)。
+
+源码仓库：https://github.com/weelume/viral-template。

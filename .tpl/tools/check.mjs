@@ -85,10 +85,21 @@ function unique(values, label) {
   if (new Set(values).size !== values.length) throw new Error(`${label} 重复`);
 }
 
+export function assertGitUrl(value) {
+  const fail = () => { throw new Error('Git 地址 gitUrl 必须是有效的 HTTP(S)、SSH 或 user@host:path 仓库地址，不得包含凭据、查询参数或本机路径'); };
+  if (typeof value !== 'string' || !value || value.length > 2048 || /\s/.test(value)) return fail();
+  if (/^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+:[^\s?#]+$/.test(value)) return value;
+  let url;
+  try { url = new URL(value); } catch { return fail(); }
+  if (!['http:', 'https:', 'ssh:'].includes(url.protocol) || !url.hostname || !url.pathname.replaceAll('/', '') || url.search || url.hash || url.password || (url.protocol !== 'ssh:' && url.username)) return fail();
+  return value;
+}
+
 export async function readTemplate(directory) {
   const root = resolve(directory);
   const template = await jsonAt(root, '.tpl/template.json');
   await canonical(template, 'template');
+  assertGitUrl(template.gitUrl);
   unique(template.surfaces.map(s => s.id), '端 id');
   for (const surface of template.surfaces) {
     if (surface.id === 'preview') throw new Error('端 id preview 为 Weelume 保留值');

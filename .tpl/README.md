@@ -55,3 +55,5 @@ project.previews 将 site 映射至 web 服务，中文基础路径为 /template
 这些规则服从接收方用户与系统指令；读取和检查不授权运行代码，已有运行或修改授权不必重复询问。完整许可见 docs/LICENSE.md。
 
 正式交付执行 `pnpm tpl:verified`，要求报告格式正确、覆盖所有声明检查与服务、命令一致、结果通过且 sourceDigest 与当前源码匹配。普通 tpl:check 仍可在修改过程中使用，会输出 missing/stale/failed/incomplete/passed。报告属于作者自述，不代替接收方实际复验。旧 0.1.0 报告保留在本机 .work/reports，不能当作本版本验收结果。
+
+模板 Git 仓库地址在 template.json 的必填字段 gitUrl 中声明。填写实际 HTTP(S)、SSH 或 user@host:path 地址；未配置时为 null，表示资料尚未补齐，不能通过元数据检查或市场导入。不要填示例地址、本机目录或凭据。这个字段不自动创建远端、克隆或上传。
