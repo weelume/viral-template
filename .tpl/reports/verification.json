@@ -3,15 +3,15 @@
   "format": "git-template-verification",
   "formatVersion": "0.2.0",
   "status": "passed",
-  "checkedAt": "2026-10-19T13:15:06.743Z",
-  "sourceCommit": "d11a3f743f32a3b8b6d831be4c5795f65cc26c04",
-  "sourceDigest": "86eab039a837629de731535752930d02af95961c86e461d12b040b579b18e4b9",
+  "checkedAt": "2026-11-03T07:15:49.633Z",
+  "sourceCommit": "3dbf24b5a86f6c4eb7f47a9858e8b99f8930ba6a",
+  "sourceDigest": "f8017ff9f6c8b64a0f3064ae2883ce5373c761710ef5933de9cf0379398e71a9",
   "environment": {
-    "platform": "win32",
+    "platform": "linux build; win32 browser",
     "arch": "x64",
     "node": "22.13.1",
     "packageManager": "pnpm@12.10.1",
-    "cleanDirectory": true,
+    "cleanDirectory": false,
     "localGitClone": true
   },
   "checks": [
@@ -25,8 +25,8 @@
       ],
       "status": "passed",
       "exitCode": 0,
-      "startedAt": "2026-10-19T13:13:47.870Z",
-      "finishedAt": "2026-10-19T13:13:56.694Z"
+      "startedAt": "2026-11-03T07:12:59.760Z",
+      "finishedAt": "2026-11-03T07:13:00.040Z"
     },
     {
       "id": "lint",
@@ -38,34 +38,8 @@
       ],
       "status": "passed",
       "exitCode": 0,
-      "startedAt": "2026-10-19T13:13:56.696Z",
-      "finishedAt": "2026-10-19T13:14:02.173Z"
-    },
-    {
-      "id": "build",
-      "cwd": ".",
-      "argv": [
-        "pnpm",
-        "run",
-        "build"
-      ],
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T13:14:02.174Z",
-      "finishedAt": "2026-10-19T13:14:27.125Z"
-    },
-    {
-      "id": "typecheck",
-      "cwd": ".",
-      "argv": [
-        "pnpm",
-        "run",
-        "typecheck"
-      ],
-      "status": "passed",
-      "exitCode": 0,
-      "startedAt": "2026-10-19T13:14:27.127Z",
-      "finishedAt": "2026-10-19T13:14:28.976Z"
+      "startedAt": "2026-11-03T07:13:00.043Z",
+      "finishedAt": "2026-11-03T07:13:01.691Z"
     },
     {
       "id": "test",
@@ -77,21 +51,46 @@
       ],
       "status": "passed",
       "exitCode": 0,
-      "startedAt": "2026-10-19T13:14:28.977Z",
-      "finishedAt": "2026-10-19T13:14:29.524Z"
+      "startedAt": "2026-11-03T07:13:01.692Z",
+      "finishedAt": "2026-11-03T07:13:02.258Z"
+    },
+    {
+      "id": "build",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-11-03T07:13:02.259Z",
+      "finishedAt": "2026-11-03T07:13:17.983Z"
+    },
+    {
+      "id": "typecheck",
+      "cwd": ".",
+      "argv": [
+        "pnpm",
+        "run",
+        "typecheck"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-11-03T07:13:17.984Z",
+      "finishedAt": "2026-11-03T07:13:19.732Z"
     },
     {
       "id": "capture",
       "cwd": ".",
       "argv": [
-        "pnpm",
-        "run",
-        "capture"
+        "node",
+        "scripts/capture-viral.mjs"
       ],
       "status": "passed",
       "exitCode": 0,
-      "startedAt": "2026-10-19T13:14:29.526Z",
-      "finishedAt": "2026-10-19T13:15:04.741Z"
+      "startedAt": "2026-11-03T07:14:28.662Z",
+      "finishedAt": "2026-11-03T07:14:58.122Z"
     }
   ],
   "services": [
@@ -99,12 +98,14 @@
       "id": "web",
       "status": "passed",
       "stopped": true,
-      "checkedAt": "2026-10-19T13:15:06.189Z"
+      "checkedAt": "2026-11-03T07:15:49.633Z"
     }
   ],
   "limitations": [
-    "同一 Windows 机器的独立 Git 克隆目录，可能复用依赖缓存；未验证其他操作系统。",
-    "自动截图在 reduced-motion 模式下运行，未连续人工观看全部动效。",
-    "表单仅本地演示；素材公开再分发许可未确认。"
+    "安装、编译和类型/Lint/测试验收在本机 WSL Linux 文件系统完成；浏览器使用同机 Windows Chrome，连接该 Linux 成品服务。",
+    "中途一次 Windows pnpm capture 触发包管理器自动依赖同步；最终 capture 直接使用 Node 执行，未在 Windows 编译。",
+    "Linux Chromium 缺少系统库，初次 capture 未成功；最终用已有 Windows Chrome 完成同一检查脚本，未新增浏览器依赖。",
+    "自动截图使用 reduced-motion；未人工连续观看所有动效，未验证真实手机与平板设备。",
+    "表单只作本地校验；参考站素材的商业使用与公开再分发许可仍受既有许可约束。"
   ]
 }

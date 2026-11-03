@@ -4,7 +4,7 @@
 
 0.2.0 报告遵循 schemas/verification.schema.json，覆盖全部六项 checks 与 web 服务。每项保存实际 argv/cwd、状态、退出码和 UTC 时间；未执行时显式填写原因及空执行结果，不能删掉这一项。服务检查通过后确认 stopped=true。sourceCommit 为验收基线，sourceDigest 绑定排除 reports 的交付源码；报告自身后续提交不会使摘要循环变化。
 
-声明的交付检查为 install、lint、typecheck、test、build、capture，命令、工作目录、依赖、超时和副作用见 project.json。pnpm verify 依次执行 lint、build、typecheck、test、capture；install 单独冻结执行。
+声明的交付检查为 install、lint、typecheck、test、build、capture，命令、工作目录、依赖、超时和副作用见 project.json。pnpm verify 依次执行 lint、build、typecheck、test、capture；install 单独冻结执行。capture 操作直接使用 node scripts/capture-viral.mjs，也可通过 pnpm capture 包装；跨系统验收时使用直接 Node 命令，避免包管理器为截图自动同步浏览器侧依赖。
 
 结构检查：git add 审阅后的交付文件，执行 pnpm tpl:check。检查器核对当前工作树和 Git 索引中的路径、元数据、素材、环境及操作引用，不执行应用，不代表已提交或业务通过。报告 sourceDigest 按检查器对已登记文件计算，排除 .tpl/reports 自身；源码改变后重新验收。
 

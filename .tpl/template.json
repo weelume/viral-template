@@ -4,10 +4,10 @@
   "$schema": "./schemas/template.schema.json",
   "format": "git-template",
   "formatVersion": "0.2.0",
-  "version": "1.1.0",
-  "name": "微域生光 · Viral 社媒增长",
+  "version": "1.2.0",
+  "name": "Viral · 社媒增长",
   "localizedNames": {
-    "en": "Weelume · Viral social growth"
+    "en": "Viral · Social growth"
   },
   "sceneId": "corporate-site",
   "listed": false,

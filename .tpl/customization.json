@@ -9,6 +9,16 @@
       "description": "调整品牌名称、导航、页脚及中英文公共文案。",
       "files": [
         {
+          "path": "src/features/site-templates/catalog/viral/config/brand.ts",
+          "kind": "file",
+          "purpose": "默认品牌名称、Logo、邮箱与版权年份"
+        },
+        {
+          "path": "src/features/site-templates/catalog/viral/host.tsx",
+          "kind": "file",
+          "purpose": "集成方品牌、市场入口与备案配置"
+        },
+        {
           "path": "src/features/site-templates/catalog/viral/components/Shell.tsx",
           "kind": "file",
           "purpose": "导航、品牌与页脚"

@@ -7,3 +7,5 @@ public/templates/viral/sources.json 原样保留，其中声明参考站页面�
 .tpl/assets 的封面及截图来自该模板的本机实际渲染，同样不自动取得公开再分发或商业授权。因此 template.json 保留 listed=false、license.type=restricted、redistributionAllowed=false。
 
 依赖按各自许可证使用。仅 .tpl/tools 中的格式检查与元数据导出代码采用该目录 LICENSE 的 MIT 许可，该许可不延伸至业务源码和素材。需要公开市场上架时先取得并记录源码及全部素材的相应权利，再由市场审核发布。
+
+中文 MiSans 字体采用小米的 MiSans 字体知识产权许可协议，并非 SIL OFL；来源与本地分片说明见 public/templates/viral/fonts/README.md。该说明不改变原参考站图片、视频及品牌素材的受限许可。

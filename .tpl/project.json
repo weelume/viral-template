@@ -115,9 +115,8 @@
     "capture": {
       "cwd": ".",
       "argv": [
-        "pnpm",
-        "run",
-        "capture"
+        "node",
+        "scripts/capture-viral.mjs"
       ],
       "dependsOn": [
         "build"

@@ -63,7 +63,7 @@ try {
   await navigate('/en')
   assert.match(await browser.evaluate('document.querySelector("h1").innerText'), /Short form\s+done right/)
   assert.equal(await browser.evaluate('document.querySelector(".vl-language").getAttribute("href")'), basePath, '英文页语言开关应返回中文首页')
-  assert.equal(await browser.evaluate(`document.querySelector('.vl-nav a[aria-label="viral home"]').getAttribute('href')`), basePath + '/en', '英文导航必须保留语言前缀')
+  assert.equal(await browser.evaluate(`document.querySelector('.vl-nav a[aria-label="Viral home"]').getAttribute('href')`), basePath + '/en', '英文导航必须保留语言前缀')
   await browser.evaluate('document.querySelector(".vl-language").click()')
   await delay(1000)
   assert.equal(await browser.evaluate('location.pathname'), basePath)

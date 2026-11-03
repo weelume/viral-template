@@ -1,7 +1,3 @@
-# Viral 社媒增长模板
+# Viral 通用模板
 
-复刻参考站点：<https://viral-sma.framer.website/>
-
-模板包含中文默认路径和英文 `/en` 路径，页面覆盖首页、关于、案例、博客、博客文章、预约通话、隐私政策、服务条款和 404。图片素材位于工程根目录下 `public/templates/viral/assets/`，来源与内部演示许可记录见 `public/templates/viral/sources.json`。
-
-页面只使用仓库已有的 Next.js、React、Tailwind CSS 和 framer-motion 能力；联系表单仅进行浏览器本地校验，不发送或保存数据。
+品牌默认值位于 config/brand.ts；组件包导出 template 与 host。页面、主题和本地素材由本工程统一维护，集成方通过 ViralHostProvider 注入品牌、市场入口与备案展示，不复制业务页面。

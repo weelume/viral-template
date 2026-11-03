@@ -1,7 +1,7 @@
 {
-  "name": "viral-site-reference",
+  "name": "viral-template",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "packageManager": "pnpm@12.10.1",
   "scripts": {
@@ -15,13 +15,8 @@
     "verify": "pnpm lint && pnpm build && pnpm typecheck && pnpm test && pnpm capture",
     "tpl:check": "node .tpl/tools/check.mjs .",
     "tpl:doctor": "node .tpl/tools/doctor.mjs .",
-    "tpl:verified": "node .tpl/tools/check.mjs . --require-verified"
-  },
-  "dependencies": {
-    "framer-motion": "^12.38.0",
-    "next": "^15.3.3",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "tpl:verified": "node .tpl/tools/check.mjs . --require-verified",
+    "bundle": "node scripts/bundle.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -35,6 +30,29 @@
     "typescript": "~6.0.2",
     "@tailwindcss/postcss": "^4.2.2",
     "tailwindcss": "^4.2.2",
-    "typescript-eslint": "^8.58.0"
-  }
+    "typescript-eslint": "^8.58.0",
+    "framer-motion": "^12.38.0",
+    "next": "^15.3.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "peerDependencies": {
+    "framer-motion": "^12.38.0",
+    "next": "^15.3.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "exports": {
+    "./template": "./src/features/site-templates/catalog/viral/meta.ts",
+    "./host": "./src/features/site-templates/catalog/viral/host.tsx",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src/features/site-templates/catalog/viral",
+    "src/features/site-templates/types.ts",
+    "public/templates/viral",
+    ".tpl/assets",
+    ".tpl/template.json",
+    ".tpl/docs/LICENSE.md"
+  ]
 }

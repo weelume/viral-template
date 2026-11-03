@@ -4,7 +4,7 @@
 
 | 修改目标 | 根目录下文件入口 | 必须同步验证 |
 | --- | --- | --- |
-| 品牌、导航、页脚 | src/features/site-templates/catalog/viral/components/Shell.tsx | 两种语言、移动导航与站内链接 |
+| 品牌、导航、页脚 | src/features/site-templates/catalog/viral/config/brand.ts、host.tsx、components/Shell.tsx | 默认品牌、集成方配置、中英文导航与站内链接 |
 | 首页与案例内容 | src/features/site-templates/catalog/viral/pages/、data.ts | 页面文案、标题换行、三端截图 |
 | 配色、间距与响应式 | src/features/site-templates/catalog/viral/theme.css | STYLE-SPEC.md、三端布局与横向溢出 |
 | 动效与视频 | 同目录 components、pages/HomePage.tsx | MOTION-SPEC.md、视频载入、reduced-motion |

@@ -84,6 +84,8 @@ export type TemplatePresentation = Omit<SiteTemplate, 'surfaces'> & {
 
 /** 模板元数据，供注册表、展示目录与真实站点路由共用。 */
 export interface SiteTemplate {
+  /** 已提交源码的真实仓库地址，供集成方追溯版本。 */
+  gitUrl?: string
   id: string
   name: string
   localizedNames?: Partial<Record<TemplateLocale, string>>

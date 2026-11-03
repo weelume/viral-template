@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 export async function openBrowser() {
-  const profile = await mkdtemp(join(tmpdir(), 'weelume-unseen-'))
+  const profile = await mkdtemp(join(tmpdir(), 'viral-preview-'))
   const chrome = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find(existsSync)
   if (!chrome) throw new Error('请通过 CHROME_PATH 指定 Chrome')
   const browser = spawn(chrome, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank'], { windowsHide: true, stdio: 'ignore' })

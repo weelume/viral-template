@@ -6,7 +6,7 @@
 
 ## 能力与边界
 
-已实现中文/英文各 9 个页面、桌面/平板/手机布局、本地视频、动效、移动导航、语言切换，以及仅本地校验的演示表单。没有业务 API、账号、数据库或邮件发送。Next 服务器负责页面渲染。/templates 是原宿主市场入口，独立工程没有该市场页面。
+已实现中文/英文各 9 个页面、桌面/平板/手机布局、本地视频、动效、移动导航、语言切换，以及仅本地校验的演示表单。没有业务 API、账号、数据库或邮件发送。Next 服务器负责页面渲染。默认品牌在 config/brand.ts；外部市场入口与备案展示由可选的 ViralHostProvider 配置，独立应用不生成市场页面或无效入口。
 
 ## 环境准备
 
@@ -15,6 +15,8 @@
 可将根 .env.example 复制成 .env：PORT 默认 43120，CHROME_PATH 可选，NEXT_TELEMETRY_DISABLED 保持 1。变量在 contracts/env.schema.json 声明，.env 不进入 Git。原生启动和截图脚本读取根 .env，进程环境优先；启动脚本强制关闭 Next 遥测，仅监听 127.0.0.1。
 
 Chrome/Chromium 只用于 capture/verify，不随仓库分发；没有浏览器时仍可安装、构建和启动，应如实记录浏览器检查未执行。
+
+构建服务与浏览器位于同一电脑的不同系统时，可以先启动已构建应用，再设置 VIRAL_PREVIEW_URL 为本机 HTTP origin，使用有浏览器的一侧执行 pnpm capture。该变量只允许 localhost 或 127.0.0.1，不接受远端或带凭据地址；已有服务由调用方负责停止，截图脚本不关闭其他进程。
 
 运行 `pnpm tpl:doctor --operation build` 或 `pnpm tpl:doctor --operation capture` 分项诊断。它执行 Node/pnpm/Git 版本探测，查找 Chrome，并读取本机环境配置；不安装工具、不启动应用、不输出环境值。node/pnpm/git 为内置工具，额外浏览器在 project.requirements 中声明。缺少 browser 只阻塞 capture/verify；服务准备构建所需工具会递归计入 web 的诊断。
 

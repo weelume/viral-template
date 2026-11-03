@@ -3,7 +3,7 @@
 ## 字体
 
 ```css
-font-family: Inter, 'Weelume Poppins', 'Weelume MiSans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+font-family: Inter, 'Viral Inter', 'Viral MiSans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 ```
 
 英文优先使用 Inter。中文使用 MiSans 或系统中文字体回退。字体文件由宿��项目提供时才接入，不在模板内部重复引入字体包。

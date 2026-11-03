@@ -18,6 +18,8 @@ customization.json 将常见修改目标映射到真实入口与检查。project
 
 页面统一使用 Shell，并通过公共 SiteTemplatePageProps 接收 basePath/locale。跨模块通过公共类型和出口引用，避免循环依赖。应用路由以代码为实际实现；新增页面或语言时同步 .tpl/template.json 的市场清单和浏览器检查。
 
+组件包导出 template 和 host，集成方通过 ViralHostProvider 注入自己的品牌、Logo、邮箱、市场入口与备案节点。默认值集中在 catalog/viral/config/brand.ts；页面不依赖集成方模块。字体及 Logo 全部归入 public/templates/viral，运行包由 pnpm bundle 生成，生产使用者固定版本及 SHA256，不读取开发者本机路径。
+
 template.json 的 platform 表示独立业务端，device 表示截图视口，不能因为有手机截图就虚构一个手机业务端。当前只有一个 site 端，支持中英文与三种视口。
 
 环境由 scripts/lib/environment.mjs 读取并由启动入口消费，服务器只渲染页面。没有数据库或服务端秘密。真实提交功能必须新增业务 API、环境/数据/迁移合同和验证，不能直接把本地表单当作已接入服务。

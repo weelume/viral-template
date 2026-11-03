@@ -2,12 +2,13 @@ import type { SiteTemplate } from '../../types'
 
 export const viralTemplate: SiteTemplate = {
   id: 'viral',
-  name: '微域生光 · Viral 社媒增长',
-  localizedNames: { en: 'Weelume · Viral social growth' },
+  gitUrl: 'https://github.com/weelume/viral-template',
+  name: 'Viral · 社媒增长',
+  localizedNames: { en: 'Viral · Social growth' },
   sceneId: 'corporate-site',
   listed: false,
   tags: ['米白黑色', '社交媒体营销', '案例与 FAQ', 'PC / iPad / H5', '中英文官网'],
-  summary: '复刻 Viral 社交媒体机构官网的完整信息架构：内容创作、社媒管理、付费媒体、增长案例、团队、FAQ、联系与政策页面，支持中文默认路径与英文 /en 路径。',
+  summary: 'Viral社交媒体增长官网模板，包含完整信息架构：内容创作、社媒管理、付费媒体、增长案例、团队、FAQ、联系与政策页面，支持中文默认路径与英文 /en 路径。',
   accentColor: '#111111',
   cover: '/templates/viral/assets/hero.jpg',
   screenshots: [
@@ -28,7 +29,7 @@ export const viralTemplate: SiteTemplate = {
     id: 'site', name: '社媒增长官网', platform: 'pc', locales: ['zh', 'en'],
     pages: [
       { slug: '', title: '首页', localizedTitles: { en: 'Home' }, load: () => import('./pages/HomePage') },
-      { slug: 'about', title: '关于 Viral', localizedTitles: { en: 'About Viral' }, load: () => import('./pages/AboutPage') },
+      { slug: 'about', title: '关于Viral', localizedTitles: { en: 'About Viral' }, load: () => import('./pages/AboutPage') },
       { slug: 'case-studies', title: '客户案例', localizedTitles: { en: 'Case studies' }, load: () => import('./pages/CasesPage') },
       { slug: 'blog', title: '博客', localizedTitles: { en: 'Blog' }, load: () => import('./pages/BlogPage') },
       { slug: 'blog/short-form-playbook', title: '短视频增长方法', localizedTitles: { en: 'The short-form playbook' }, load: () => import('./pages/ArticlePage') },
